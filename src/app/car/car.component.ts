@@ -11,6 +11,7 @@ export class CarComponent {
   @Input('carItem') car: { name: string, year: number };
   @ContentChild('carHeading') carHeading: ElementRef;
 
+
   ngAfterViewInit() {
     console.log(this.carHeading);
   }

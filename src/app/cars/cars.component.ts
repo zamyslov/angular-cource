@@ -27,7 +27,10 @@ export class CarsComponent {
   }
 
   changeCarName() {
-
+      this.cars[0].name = 'New car name!';
   }
 
+  deleteCar() {
+    this.cars.splice(0, 1);
+  }
 }

@@ -3,10 +3,12 @@ import {NgModule} from '@angular/core';
 
 import {AppComponent} from './app.component';
 import {FormsModule} from '@angular/forms';
+import {PowPipe} from './pow.pipe';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    PowPipe
   ],
   imports: [
     BrowserModule, FormsModule

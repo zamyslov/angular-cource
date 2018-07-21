@@ -1,20 +1,12 @@
-import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import {BrowserModule} from '@angular/platform-browser';
+import {NgModule} from '@angular/core';
 
-import { AppComponent } from './app.component';
-import { FormsModule } from '@angular/forms';
-import { CarsComponent } from './cars/cars.component';
-import { CarComponent } from './car/car.component';
-import { AddCarComponent } from './add-car/add-car.component';
-import {BackgroundDirective} from './directives/background.directive';
+import {AppComponent} from './app.component';
+import {FormsModule} from '@angular/forms';
 
 @NgModule({
   declarations: [
-    AppComponent,
-    CarsComponent,
-    CarComponent,
-    AddCarComponent,
-    BackgroundDirective
+    AppComponent
   ],
   imports: [
     BrowserModule, FormsModule
@@ -22,4 +14,5 @@ import {BackgroundDirective} from './directives/background.directive';
   providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+}

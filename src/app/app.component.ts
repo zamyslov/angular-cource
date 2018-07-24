@@ -5,16 +5,9 @@ import {Component} from '@angular/core';
   templateUrl: './app.component.html'
 })
 export class AppComponent {
-  cars = [
-    {name: 'Mazda', isSold: false},
-    {name: 'Ford', isSold: false},
-    {name: 'BMW', isSold: false},
-    {name: 'Lada', isSold: false}
+  answers = [
+    {type: 'yes', text: 'Да'},
+    {type: 'no', text: 'Нет'}
   ];
 
-  addCarToList(carName: string) {
-    this.cars.push({
-      name: carName, isSold: false
-    });
-  }
 }

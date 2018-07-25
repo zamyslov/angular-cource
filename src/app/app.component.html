@@ -8,6 +8,7 @@
         <input type="text" class="form-control" ngModel name="email" required email #email="ngModel">
         <p *ngIf="email.invalid && email.touched">Введите корректный e-mail</p>
       </div>
+        <button type="button" class="btn-primary" (click)="addRandEmail()">Добавить случайный email</button>
         <div class="form-group" [ngClass]="{'has-warning' : pass.invalid && pass.touched}">
         <label>Password</label>
         <input type="password" class="form-control" ngModel name="pass" required #pass="ngModel">
@@ -30,5 +31,9 @@
       </div>
       <button class="btn-success" type="submit" [disabled]="!form.valid">Сохранить</button>
     </form>
+  </div>
+
+  <div *ngIf="isSubmited">
+    <pre>{{formData | json}}</pre>
   </div>
 </div>

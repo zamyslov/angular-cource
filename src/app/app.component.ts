@@ -1,4 +1,5 @@
-import {Component, OnInit} from '@angular/core';
+import {Component} from '@angular/core';
+import {CarsService} from './cars.service';
 
 @Component({
   selector: 'app-root',
@@ -6,8 +7,15 @@ import {Component, OnInit} from '@angular/core';
 })
 export class AppComponent {
 
-  cars = [
-    {name: 'Ford', color: 'white', id: 1}
-  ];
+  cars = [];
+
+  constructor(private carService: CarsService) {
+  }
+
+  loadCars() {
+    this.carService.getCars().subscribe(response => {
+      console.log(response);
+    });
+  }
 
 }

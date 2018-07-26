@@ -1,39 +1,27 @@
-<!--The content below is only a placeholder and can be replaced.-->
-<div class="container">
-  <div class="col-xs-8 col-xs-offset-2">
-    <form (ngSubmit)="submitForm(form)" #form="ngForm">
-      <div ngModelGroup="user" #user="ngModelGroup">
-        <div class="form-group" [ngClass]="{'has-warning' : email.invalid && email.touched}">
-        <label>Email</label>
-        <input type="text" class="form-control" ngModel name="email" required email #email="ngModel">
-        <p *ngIf="email.invalid && email.touched">Введите корректный e-mail</p>
-      </div>
-        <button type="button" class="btn-primary" (click)="addRandEmail()">Добавить случайный email</button>
-        <div class="form-group" [ngClass]="{'has-warning' : pass.invalid && pass.touched}">
-        <label>Password</label>
-        <input type="password" class="form-control" ngModel name="pass" required #pass="ngModel">
-        <p *ngIf="pass.invalid && pass.touched">Введите корректный пароль</p>
-      </div>
-        <h2 *ngIf="user.invalid && user.touched">ERRROR!</h2>
-      </div>
-      <div class="form-group">
-        <label>Выберите страну</label>
-        <select class="form-control"  ngModel name="country" required [ngModel]="defaultCountry">
-          <option value="ukr">Украина</option>
-          <option value="by">Беларусь</option>
-          <option value="mol">Молдова</option>
-        </select>
-      </div>
-      <div class="radio" *ngFor="let ans of answers" required>
-        <label>
-          <input type="radio" [value]="ans.type" ngModel name="answer" [ngModel]="defaultAnswer">{{ans.text}}
-        </label>
-      </div>
-      <button class="btn-success" type="submit" [disabled]="!form.valid">Сохранить</button>
-    </form>
-  </div>
-
-  <div *ngIf="isSubmited">
-    <pre>{{formData | json}}</pre>
-  </div>
+<div class="col-xs-4 col-md-4">
+  <form [formGroup]="form" (ngSubmit)="onSubmit()">
+    <div class="form-group">
+      <label>Email</label>
+      <input type="text" class="form-control" formControlName="email">
+    </div>
+    <div class="form-group">
+      <label>Пароль</label>
+      <input type="password" class="form-control" formControlName="pass">
+    </div>
+    <div class="form-group">
+      <label>Выберите страну</label>
+      <select class="form-control" formControlName="country">
+        <option value="ru">Россия</option>
+        <option value="by">Белоруссия</option>
+        <option value="ua">Украина</option>
+      </select>
+    </div>
+    <div class="radio" *ngFor="let ans of answers" >
+      <label>
+        <input type="radio" [value]="ans.type" formControlName="answer">{{ans.text}}
+      </label>
+    </div>
+    <button class="btn btn-success" type="submit">Сохранить</button>
+  </form>
 </div>
+

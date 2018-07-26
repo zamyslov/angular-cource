@@ -1,58 +1,13 @@
 import {Component, OnInit} from '@angular/core';
-import {FormControl, FormGroup, Validators} from '@angular/forms';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html'
 })
-export class AppComponent implements OnInit {
+export class AppComponent {
 
-  answers = [
-    {type: 'yes', text: 'Да'},
-    {type: 'no', text: 'Нет'}
+  cars = [
+    {name: 'Ford', color: 'white', id: 1}
   ];
-
-  form: FormGroup;
-  charsCount = 5;
-
-  ngOnInit(): void {
-    this.form = new FormGroup({
-      user: new FormGroup({
-        email: new FormControl('', [Validators.required, Validators.email], this.checkForEmail),
-        pass: new FormControl('', [Validators.required, this.checkForLength.bind(this)])
-
-      }),
-      country: new FormControl('ua'),
-      answer: new FormControl('no')
-    });
-  }
-
-  onSubmit() {
-
-  }
-
-  checkForLength(control: FormControl) {
-    if (control.value.length <= this.charsCount) {
-      return {
-        'lengthError': true
-      };
-    }
-    return null;
-  }
-
-  checkForEmail(control: FormControl): Promise<any> {
-    return new Promise<any>((resolve, reject) => {
-      setTimeout(() => {
-        if (control.value === '1@1') {
-          resolve({
-            'checkEmailIsUsed': true
-          });
-        } else {
-          resolve(null);
-        }
-      }, 3000);
-    });
-  }
-
 
 }

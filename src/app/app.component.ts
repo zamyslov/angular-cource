@@ -13,12 +13,13 @@ export class AppComponent implements OnInit {
   ];
 
   form: FormGroup;
+  charsCount = 5;
 
   ngOnInit(): void {
     this.form = new FormGroup({
       user: new FormGroup({
         email: new FormControl('', [Validators.required, Validators.email]),
-        pass: new FormControl('', Validators.required)
+        pass: new FormControl('', [Validators.required, this.checkForLength.bind(this)])
 
       }),
       country: new FormControl('ua'),
@@ -28,6 +29,15 @@ export class AppComponent implements OnInit {
 
   onSubmit() {
 
+  }
+
+  checkForLength(control: FormControl) {
+    if (control.value.length <= this.charsCount) {
+      return {
+        'lengthError': true
+      };
+    }
+    return null;
   }
 
 

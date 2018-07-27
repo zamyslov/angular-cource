@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 
 @Injectable()
 export class CarsService {
@@ -7,15 +7,21 @@ export class CarsService {
   }
 
   getCars() {
-    return this.http.get('http://localhost:3000/cars');
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json; charset-utf8'
+    });
+    return this.http.get('http://localhost:3000/cars', {headers});
   }
 
   addCar(carName: string) {
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json; charset-utf8'
+    });
     const data = {
       name: carName,
       color: 'blue'
     };
-    return this.http.post('http://localhost:3000/cars', data);
+    return this.http.post('http://localhost:3000/cars', data, {headers});
   }
 
   deleteCar(car: any) {

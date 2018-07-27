@@ -1,5 +1,7 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {catchError} from 'rxjs/operators';
+import {throwError} from 'rxjs';
 
 @Injectable()
 export class CarsService {
@@ -10,7 +12,11 @@ export class CarsService {
     const headers = new HttpHeaders({
       'Content-Type': 'application/json; charset-utf8'
     });
-    return this.http.get('http://localhost:3000/cars', {headers});
+    return this.http.get('http://localhost:3100/cars', {headers}).pipe(
+      catchError((error: any) => {
+        return throwError('Server error');
+      })
+    );
   }
 
   addCar(carName: string) {

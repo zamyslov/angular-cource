@@ -22,8 +22,12 @@ export class AppComponent {
 
   loadCars() {
     this.carService.getCars().subscribe((response: Cars[]) => {
-      this.cars = response;
-    });
+        this.cars = response;
+      },
+      error => {
+        alert(error);
+      }
+    );
   }
 
   addCar() {

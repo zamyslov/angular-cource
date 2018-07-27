@@ -33,6 +33,12 @@ export class AppComponent {
     this.carName = '';
   }
 
+  deleteCar(car: Cars) {
+    this.carService.deleteCar(car).subscribe((data) => {
+      this.cars = this.cars.filter(c => c.id !== car.id);
+    });
+  }
+
   getRandColor() {
     const color = Math.round(Math.random() * (this.colors.length - 1));
     return this.colors[color];

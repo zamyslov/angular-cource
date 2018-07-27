@@ -2,13 +2,8 @@
   "cars": [
     {
       "name": "Lada",
-      "color": "white",
-      "id": 1
-    },
-    {
-      "name": "Lada",
       "color": "red",
-      "id": 2
+      "id": 1
     }
   ]
 }

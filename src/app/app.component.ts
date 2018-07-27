@@ -14,6 +14,7 @@ interface Cars {
 export class AppComponent {
 
   cars: Cars[] = [];
+  carName = '';
 
   constructor(private carService: CarsService) {
   }
@@ -24,4 +25,11 @@ export class AppComponent {
     });
   }
 
+  addCar() {
+    this.carService.addCar(this.carName).subscribe((json: Cars) => {
+      console.log(json);
+      this.cars.push(json);
+    });
+    this.carName = '';
+  }
 }

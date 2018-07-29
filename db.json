@@ -1,9 +1,16 @@
 {
+  "title": {
+    "value": "My app"
+  },
   "cars": [
     {
       "name": "Lada",
       "color": "red",
       "id": 1
+    },
+    {
+      "id": 2,
+      "color": "blue"
     }
   ]
 }

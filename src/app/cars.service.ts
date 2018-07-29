@@ -8,11 +8,15 @@ export class CarsService {
   constructor(private http: HttpClient) {
   }
 
+  getAppTitle() {
+    return this.http.get('http://localhost:3000/title');
+  }
+
   getCars() {
     const headers = new HttpHeaders({
       'Content-Type': 'application/json; charset-utf8'
     });
-    return this.http.get('http://localhost:3100/cars', {headers}).pipe(
+    return this.http.get('http://localhost:3000/cars', {headers}).pipe(
       catchError((error: any) => {
         return throwError('Server error');
       })

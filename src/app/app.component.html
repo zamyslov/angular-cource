@@ -1,11 +1,13 @@
 <div class="col-xs-4 col-md-8">
   <input type="text" class="form-control" [(ngModel)]="carName">
   <hr>
+  <h1>{{appTitle }}</h1>
+  <hr>
   <button class="btn-success" (click)="addCar()">Добавить машину</button>
   <button class="btn-primary" (click)="loadCars()">Загрузить машины</button>
   <hr>
   <ul class="list-group">
-    <li class="list-group-item" *ngFor="let car of cars">
+    <li class="list-group-item" *ngFor="let car of cars | async">
       <span class="badge"
             [ngStyle]="{background: car.color}">
         {{car.id}}

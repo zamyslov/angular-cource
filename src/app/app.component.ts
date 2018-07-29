@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {CarsService} from './cars.service';
 
 interface Cars {
@@ -11,23 +11,24 @@ interface Cars {
   selector: 'app-root',
   templateUrl: './app.component.html'
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
 
-  cars: Cars[] = [];
+  cars: any;
   colors = ['white', 'red', 'blue', 'pink'];
   carName = '';
+  appTitle;
 
   constructor(private carService: CarsService) {
   }
 
+
+  ngOnInit(): void {
+    this.appTitle = this.carService.getAppTitle().subscribe((response) => {this.appTitle = response.value; });
+    console.log(this.appTitle);
+  }
+
   loadCars() {
-    this.carService.getCars().subscribe((response: Cars[]) => {
-        this.cars = response;
-      },
-      error => {
-        alert(error);
-      }
-    );
+    this.cars = this.carService.getCars();
   }
 
   addCar() {

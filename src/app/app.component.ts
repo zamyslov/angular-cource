@@ -9,4 +9,12 @@ import {divTrigger} from './app.animations';
 export class AppComponent {
   isVisible = false;
 
+  onAnimationsStart(event: AnimationEvent) {
+
+  }
+
+  onAnimationsDone(event: AnimationEvent) {
+
+  }
+
 }

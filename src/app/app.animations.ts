@@ -1,14 +1,24 @@
-import {animate, state, style, transition, trigger} from '@angular/animations';
+import {keyframes, group, animate, state, style, transition, trigger} from '@angular/animations';
 
 export const divTrigger = trigger('divTrigger', [
   // void => *
   transition(':enter', [
     style({
-      opacity: 0
+      width: '*',
+      height: '*'
     }),
-    animate(500, style({
-      opacity: 1
-    }))
+    group([
+      animate(2000, style({
+        width: '200px',
+        height: '200px'
+      })),
+      animate(6000, keyframes([
+        style({backgroundColor: 'blue'}),
+        style({backgroundColor: 'yellow'}),
+        style({backgroundColor: 'green'})
+      ]))
+    ]),
+    animate(1000)
   ]),
   // * => void
   transition(':leave', [
@@ -18,14 +28,3 @@ export const divTrigger = trigger('divTrigger', [
   ])
 ]);
 
-export const changeWidthTrigger = trigger('changeWidthTrigger', [
-  transition('* => *', [
-    animate(1000, style({
-      width: '10px'
-    })),
-    animate(1000, style({
-      width: '*'
-    })),
-
-  ])
-]);

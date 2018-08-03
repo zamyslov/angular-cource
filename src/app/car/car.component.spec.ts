@@ -1,11 +1,14 @@
-import {ComponentFixture, TestBed} from '@angular/core/testing';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 import {CarComponent} from './car.component';
 import {CarService} from './car.service';
+import {of} from 'rxjs';
+import {delay} from 'rxjs/operators';
 
 describe('CarComponent', () => {
 
   let fixture: ComponentFixture<CarComponent>;
   let component: CarComponent;
+  let carService: CarService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
@@ -13,6 +16,7 @@ describe('CarComponent', () => {
     });
     fixture = TestBed.createComponent(CarComponent);
     component = fixture.debugElement.componentInstance;
+    carService = fixture.debugElement.injector.get(CarService);
   });
 
   it('it should create component', () => {
@@ -26,13 +30,11 @@ describe('CarComponent', () => {
   });
 
   it('should inject carService', () => {
-    const carService = fixture.debugElement.injector.get(CarService);
     fixture.detectChanges();
     expect(component.isCarVisible).toEqual(carService.getVisibility());
   });
 
   it('should display car if is visible', () => {
-    const carService = fixture.debugElement.injector.get(CarService);
     carService.showCar();
     fixture.detectChanges();
     const native = fixture.debugElement.nativeElement;
@@ -40,10 +42,23 @@ describe('CarComponent', () => {
   });
 
   it('should not display car if is not visible', () => {
-    const carService = fixture.debugElement.injector.get(CarService);
     carService.hideCar();
     fixture.detectChanges();
     const native = fixture.debugElement.nativeElement;
     expect(native.querySelector('span').textContent).not.toEqual('Car is visible');
   });
+
+  it('should not get carName if not async', () => {
+    spyOn(carService, 'getCarName').and.returnValue(of('TestCar').pipe(delay(100)));
+    fixture.detectChanges();
+    expect(component.carName).toBe(undefined);
+  });
+
+  it('should not get carName if async', async(() => {
+    spyOn(carService, 'getCarName').and.returnValue(of('TestCar').pipe(delay(100)));
+    fixture.detectChanges();
+    fixture.whenStable().then(() => {
+      expect(component.carName).toEqual('TestCar');
+    });
+  }));
 });
